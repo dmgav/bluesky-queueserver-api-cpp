@@ -31,9 +31,12 @@
 *.out
 *.app
 
-#VSCode
+# VSCode
 .vscode/
 
-#vim
+# vim
 *.sw*
+
+# CMake
+*build*/
 
