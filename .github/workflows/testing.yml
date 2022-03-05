@@ -30,6 +30,8 @@ jobs:
         # pip install -r requirements-dev.txt
         # pip list
 
+    - name: Build
+      run: |
         mkdir build
         cd build
         cmake ..
