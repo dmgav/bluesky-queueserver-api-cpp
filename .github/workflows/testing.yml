@@ -7,8 +7,8 @@ jobs:
 
     runs-on: ubuntu-latest
     strategy:
-      matrix:
-        python-version: [3.7, 3.8, 3.9]
+      # matrix:
+      #   python-version: [3.7, 3.8, 3.9]
       fail-fast: false
 
     steps:
@@ -31,12 +31,15 @@ jobs:
         # pip list
 
         mkdir build
-        pushd build
+        cd build
         cmake ..
         make
+        ls -al
 
     - name: Test with pytest
       run: |
         # coverage run -m pytest -vv
         # coverage report -m
-        ./testing
+        cd build
+        ls -al
+        ./Testing
