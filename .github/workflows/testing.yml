@@ -1,0 +1,113 @@
+name: Ubuntu
+
+on: [push, pull_request]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        # compiler: [g++-8, g++-9, g++-10, g++-11, clang++-8, clang++-9, clang++-10, clang++-11, clang++-12]
+        include:
+          - compiler_cpp: g++-8
+            compiler_c: gcc-8
+            standard: 14
+          - compiler_cpp: g++-9
+            compiler_c: gcc-9
+            standard: 14
+          - compiler_cpp: g++-10
+            compiler_c: gcc-10
+            standard: 14
+          - compiler_cpp: g++-11
+            compiler_c: gcc-11
+            standard: 11
+          - compiler_cpp: g++-11
+            compiler_c: gcc-11
+            standard: 14
+          - compiler_cpp: g++-11
+            compiler_c: gcc-11
+            standard: 17
+          - compiler_cpp: g++-11
+            compiler_c: gcc-11
+            standard: 20
+          - compiler_cpp: g++-11
+            compiler_c: gcc-11
+            standard: 23
+          - compiler_cpp: clang++-8
+            compiler_c: clang-8
+            standard: 14
+          - compiler_cpp: clang++-9
+            compiler_c: clang-9
+            standard: 14
+          - compiler_cpp: clang++-10
+            compiler_c: clang-10
+            standard: 14
+          - compiler_cpp: clang++-11
+            compiler_c: clang-11
+            standard: 14
+          - compiler_cpp: clang++-12
+            compiler_c: clang-12
+            standard: 14
+
+      fail-fast: false
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install dependencies
+      run: |
+        if [ ${{matrix.compiler_cpp}} == g++-8 ]
+        then
+            sudo apt install gcc-8 g++-8
+        elif [ ${{matrix.compiler_cpp}} == g++-9 ]
+        then
+          sudo apt install gcc-9 g++-9
+        elif [ ${{matrix.compiler_cpp}} == g++-10 ]
+        then
+          sudo apt install gcc-10 g++-10
+        elif [ ${{matrix.compiler_cpp}} == g++-11 ]
+        then
+          sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
+          sudo apt install gcc-11 g++-11
+        elif [ ${{matrix.compiler_cpp}} == clang++-8 ]
+        then
+          sudo apt install clang-8
+        elif [ ${{matrix.compiler_cpp}} == clang++-9 ]
+        then
+          sudo apt install clang-9
+        elif [ ${{matrix.compiler_cpp}} == clang++-10 ]
+        then
+          sudo apt install clang-10
+        elif [ ${{matrix.compiler_cpp}} == clang++-11 ]
+        then
+          sudo apt install clang-11
+        elif [ ${{matrix.compiler_cpp}} == clang++-12 ];
+        then
+          sudo apt install clang-12
+        fi
+
+        sudo apt install redis
+        cmake --version
+        dpkg --list | grep compiler
+
+    - name: Build
+      run: |
+        mkdir build
+        cmake -S . -B build -D CMAKE_C_COMPILER=${{ matrix.compiler_c }} -D CMAKE_CXX_COMPILER=${{ matrix.compiler_cpp }} -D CMAKE_CXX_STANDARD=${{ matrix.standard }}
+        cmake --build build --config Debug
+        cd build
+        echo $PWD
+        ls -al
+
+    - name: Run tests
+      run: |
+        cd build
+        echo $PWD
+        ls -al
+        ctest --output-on-failure
+
+    - name: Run executable
+      run: |
+        cd build
+        ls -al
+        ./testing
