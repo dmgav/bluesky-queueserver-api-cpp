@@ -23,14 +23,17 @@ message("CMAKE_CXX_STANDARD_REQUIRED: ${CMAKE_CXX_STANDARD_REQUIRED}")
 add_library(_some_code STATIC "${SrcDir}/some_code.cpp")
 # add_library(_some_code SHARED "${SrcDir}/some_code.cpp")
 
-include(FetchContent)
-FetchContent_Declare(
-  googletest
-  URL https://github.com/google/googletest/archive/e2239ee6043f73722e7aa812a459f54a28552929.zip  # v1.11.0
-)
-# For Windows: Prevent overriding the parent project's compiler/linker settings
-set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
-FetchContent_MakeAvailable(googletest)
+# include(FetchContent)
+# FetchContent_Declare(
+#   googletest
+#   URL https://github.com/google/googletest/archive/e2239ee6043f73722e7aa812a459f54a28552929.zip  # v1.11.0
+# )
+# # For Windows: Prevent overriding the parent project's compiler/linker settings
+# set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+# FetchContent_MakeAvailable(googletest)
+
+# Assume that 'googletest' is installed in 'code/extern/googletest' directory
+add_subdirectory(code/extern/googletest)
 
 enable_testing()
 add_executable(hello_test code/tests/test_hello.cpp)
