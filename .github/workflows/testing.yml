@@ -54,6 +54,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+      with:
+        submodules: recursive
     - name: Install dependencies
       run: |
         if [ ${{matrix.compiler_cpp}} == g++-8 ]
