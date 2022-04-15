@@ -1,3 +1,6 @@
 [submodule "code/extern/googletest"]
 	path = code/extern/googletest
 	url = https://github.com/google/googletest
+[submodule "code/extern/json"]
+	path = code/extern/json
+	url = https://github.com/nlohmann/json.git
