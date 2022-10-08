@@ -39,5 +39,5 @@ gtest_discover_tests(hello_test)
 gtest_discover_tests(test_some_code)
 
 # ==================== Build executable ===================
-add_executable(bluesky-queueserver-api-cpp "${SrcDir}/main.cpp")
-target_link_libraries(bluesky-queueserver-api-cpp _some_code)
+add_executable(some-exec "${SrcDir}/main.cpp")
+target_link_libraries(some-exec _some_code)
