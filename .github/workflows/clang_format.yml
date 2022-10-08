@@ -16,8 +16,8 @@ jobs:
 
     - name: Install dependencies
       run: |
-        sudo apt install clang-format
-        clang-format --version
+        sudo apt-get install clang-format-14
+        clang-format-14 --version
 
     - name: Run tests
       run: |
