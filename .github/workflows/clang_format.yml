@@ -1,4 +1,4 @@
-name: clang-format
+name: clang-format check
 
 on: [push, pull_request]
 
@@ -8,18 +8,29 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
+      matrix:
+        path:
+          - 'code/src'
+          - 'code/include'
+          - 'code/tests'
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
       with:
         submodules: recursive
 
-    - name: Install dependencies
-      run: |
-        apt search clang-format
-        sudo apt-get install clang-format-14
-        clang-format-14 --version
+    - name: Run clang-format style check for C/C++/Protobuf programs.
+        uses: jidicula/clang-format-action@v4.9.0
+        with:
+          clang-format-version: '14'
+          check-path: ${{ matrix.path }}
 
-    - name: Run tests
-      run: |
-        ./clang_validate.sh
+    # - name: Install dependencies
+    #   run: |
+    #     apt search clang-format
+    #     sudo apt-get install clang-format-14
+    #     clang-format-14 --version
+
+    # - name: Run tests
+    #   run: |
+    #     ./clang_validate.sh
