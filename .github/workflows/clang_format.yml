@@ -20,17 +20,7 @@ jobs:
         submodules: recursive
 
     - name: Run clang-format style check for C/C++/Protobuf programs.
-        uses: jidicula/clang-format-action@v4.9.0
-        with:
-          clang-format-version: '14'
-          check-path: ${{ matrix.path }}
-
-    # - name: Install dependencies
-    #   run: |
-    #     apt search clang-format
-    #     sudo apt-get install clang-format-14
-    #     clang-format-14 --version
-
-    # - name: Run tests
-    #   run: |
-    #     ./clang_validate.sh
+      uses: jidicula/clang-format-action@v4.9.0
+      with:
+        clang-format-version: '14'
+        check-path: ${{ matrix.path }}
