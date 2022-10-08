@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.10)
 
 # set the project name
-project(testing LANGUAGES CXX)
+project(bluesky-qserver-api-cpp LANGUAGES CXX)
 
 set(SrcDir "code/src")
 
@@ -39,5 +39,5 @@ gtest_discover_tests(hello_test)
 gtest_discover_tests(test_some_code)
 
 # ==================== Build executable ===================
-add_executable(testing "${SrcDir}/main.cpp")
-target_link_libraries(testing _some_code)
+add_executable(bluesky-queueserver-api-cpp "${SrcDir}/main.cpp")
+target_link_libraries(bluesky-queueserver-api-cpp _some_code)
