@@ -89,6 +89,7 @@ jobs:
         fi
 
         sudo apt install redis
+        sudo apt install libzmq3-dev
         cmake --version
         dpkg --list | grep compiler
 
