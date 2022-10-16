@@ -22,6 +22,8 @@ message("CMAKE_CXX_STANDARD_REQUIRED: ${CMAKE_CXX_STANDARD_REQUIRED}")
 
 # add_subdirectory(code/extern/json)
 
+find_package(Threads REQUIRED)
+
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/code/extern/json/single_include)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/code/extern/cppzmq)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/code/extern/cpp-httplib)
@@ -49,8 +51,10 @@ target_link_libraries(some-exec _some_code)
 
 # ==================== Build examples =====================
 add_executable(ex01_zmq_cm "${SrcDir}/examples/ex01_zmq_cm.cpp")
-target_link_libraries(ex01_zmq_cm zmq)
+target_link_libraries(ex01_zmq_cm zmq Threads::Threads)
 
 add_executable(ex02_http_cm "${SrcDir}/examples/ex02_http_cm.cpp")
+target_link_libraries(ex02_http_cm Threads::Threads)
 
 add_executable(ex03_auth_api "${SrcDir}/examples/ex03_auth_api.cpp")
+target_link_libraries(ex03_auth_api Threads::Threads)
