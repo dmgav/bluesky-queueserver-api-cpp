@@ -4,3 +4,9 @@
 [submodule "code/extern/json"]
 	path = code/extern/json
 	url = https://github.com/nlohmann/json.git
+[submodule "code/extern/cppzmq"]
+	path = code/extern/cppzmq
+	url = https://github.com/zeromq/cppzmq
+[submodule "code/extern/cpp-httplib"]
+	path = code/extern/cpp-httplib
+	url = https://github.com/yhirose/cpp-httplib
