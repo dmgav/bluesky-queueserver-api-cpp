@@ -20,11 +20,16 @@ message("CMAKE_CXX_COMPILER: ${CMAKE_CXX_COMPILER}")
 message("CMAKE_CXX_STANDARD: ${CMAKE_CXX_STANDARD}")
 message("CMAKE_CXX_STANDARD_REQUIRED: ${CMAKE_CXX_STANDARD_REQUIRED}")
 
-add_subdirectory(code/extern/json)
+# add_subdirectory(code/extern/json)
+
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/code/extern/json/single_include)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/code/extern/cppzmq)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/code/extern/cpp-httplib)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/code/include)
 
 add_library(_some_code STATIC "${SrcDir}/some_code.cpp")
 # add_library(_some_code SHARED "${SrcDir}/some_code.cpp")
-target_include_directories(_some_code PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/code/extern/json/include")
+# target_include_directories(_some_code PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/code/extern/json/include")
 
 # Assume that 'googletest' is installed in 'code/extern/googletest' directory
 add_subdirectory(code/extern/googletest)
@@ -41,3 +46,11 @@ gtest_discover_tests(test_some_code)
 # ==================== Build executable ===================
 add_executable(some-exec "${SrcDir}/main.cpp")
 target_link_libraries(some-exec _some_code)
+
+# ==================== Build examples =====================
+add_executable(ex01_zmq_cm "${SrcDir}/examples/ex01_zmq_cm.cpp")
+target_link_libraries(ex01_zmq_cm zmq)
+
+add_executable(ex02_http_cm "${SrcDir}/examples/ex02_http_cm.cpp")
+
+add_executable(ex03_auth_api "${SrcDir}/examples/ex03_auth_api.cpp")

@@ -1,7 +1,7 @@
 #ifndef INCLUDE_QSERVER_UTILS_
 #define INCLUDE_QSERVER_UTILS_
 
-#include <json.hpp>
+#include <nlohmann/json.hpp>
 #include <string>
 
 namespace qserver {

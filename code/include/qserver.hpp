@@ -10,7 +10,7 @@
 #include <thread>
 
 #include <httplib.h>
-#include <json.hpp>
+#include <nlohmann/json.hpp>
 #include <zmq.hpp>
 
 #include <detail/api.hpp>
