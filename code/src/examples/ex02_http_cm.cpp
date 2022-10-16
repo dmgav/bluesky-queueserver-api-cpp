@@ -39,7 +39,7 @@ int main() {
   std::string token = res.payload["access_token"].get<std::string>();
   std::cout << "token: " << token << std::endl;
 
-  //httplib::Headers headers = {{"Authorization", std::string("Bearer " + token)}};
+  // httplib::Headers headers = {{"Authorization", std::string("Bearer " + token)}};
 
   comm.set_security_key(token, SecurityType::TOKEN);
   res = comm.send_request("queue_get", RequestParams(json()));
@@ -67,8 +67,7 @@ int main() {
 
   std::cout << "Sleeping ..." << std::endl;
   req_params = json::parse("{\"time\": 1}");
-  res = comm.send_request(Method(HTTPMethod::HTTP_GET, "/api/test/server/sleep"),
-                          RequestParams(req_params), 1500);
+  res = comm.send_request(Method(HTTPMethod::HTTP_GET, "/api/test/server/sleep"), RequestParams(req_params), 1500);
   std::cout << "RESULT: " << res << "\n"
             << "\n"
             << std::endl;
